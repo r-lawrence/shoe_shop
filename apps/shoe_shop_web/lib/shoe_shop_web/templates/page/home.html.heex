@@ -1,0 +1,125 @@
+<%= ShoeShopWeb.LayoutView.render("nav_bar.html", assigns) %>
+<section>
+
+
+
+  <select id="type-selection" phx-hook="changeShoeTypeSelection">
+    <option>Men</option>
+    <option>Women</option>
+
+  </select>
+
+  <div class="shoes">
+    <div class="sidebar">
+      <h3>Filter</h3>
+      <label class="temp"> excercise
+        <input class="checkbox" type="checkbox">
+      </label>
+      <label  class="temp"> fashion
+        <input class="checkbox" type="checkbox">
+      </label>
+    </div>
+
+    <div class="shoe-container">
+      <%= for shoe <- assigns.shoes do %>
+        <div class="shoe" phx-click="renderShoePreview" phx-value-shoe_id={shoe.id}>
+
+          <img src={shoe.img_url}>
+          <span><%= shoe.name %></span>
+          <span><%= shoe.style%></span>
+          <span>$ <%= shoe.price%>  </span>
+
+
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+
+  <%= if assigns.preview != nil do %>
+    <div class="preview-shoe-modal">
+      <div class="modal-content">
+        <span phx-value-modal="preview" phx-click="closeModal" class="close-button">x</span>
+        <img src={assigns.preview.img_url}>
+        <span><%= assigns.preview.name %></span>
+        <span><%= assigns.preview.style%></span>
+        <span>$ <%= assigns.preview.price%> </span>
+        <select class="size-selection">
+         <%= for size <- assigns.preview.sizes do %>
+           <option ><%= size %></option>
+         <% end %>
+        </select>
+        <button id={assigns.preview.id} phx-hook="addToCart">add to cart</button>
+      </div>
+    </div>
+  <%end %>
+
+  <%= if assigns.show_checkout != false do %>
+    <div class="checkout-preview-modal">
+      <div class="modal-content">
+        <span phx-value-modal="checkout" phx-click="closeModal" class="close-button">x</span>
+        <div class="cart-review-container">
+          <div class="cart-review">
+            <h2> Bag</h2>
+
+            <%= for item <- assigns.cart do %>
+
+              <div class="checkout-shoe-container">
+
+                <div class="checkout-image-container">
+
+                <img class="checkout-modal-image" src={item.img_url}>
+                </div>
+
+                <div class="checkout-details-and-price-container">
+
+                  <div class="checkout-details-container">
+                    <span><%= item.name %></span>
+                    <span><%= item.style %></span>
+                    <span><%= item.type %></span>
+
+                    <span>Shoe Size <%= item.size %></span>
+
+                  </div>
+                  <div class="checkout-price-container">
+                    <span class="checkout-price">$<%= item.price %></span>
+
+                  </div>
+                  <div class="checkout-delete-item">
+
+                    <span phx-click="removeCartItem" phx-value-id={item.id}>x</span>
+                  </div>
+
+                </div>
+              </div>
+            <%end %>
+          </div>
+
+          <div class="cart-review">
+            <h2> Summary</h2>
+            <label class="checkout-summary-label">
+              <span>Subtotal</span>
+              <span>1600</span>
+            </label>
+            <label class="checkout-summary-label">
+              <span>Est. Shipping</span>
+              <span>$8.00</span>
+            </label>
+            <label class="checkout-summary-label">
+              <span>Est. tax</span>
+              <span>$23.00</span>
+            </label>
+            <label class="checkout-summary-label">
+              <span>total</span>
+              <span>$23.00</span>
+            </label>
+            <button disabled="true">checkout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+
+
+</section>

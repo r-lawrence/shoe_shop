@@ -1,0 +1,139 @@
+/* This file is for your main application CSS */
+/* @import "./phoenix.css"; */
+
+/* Alerts and form errors used by phx.new */
+html {
+  width: 100%;
+}
+
+section {
+  width: 100%;
+  margin: auto;
+}
+
+.shoe-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* grid-template-columns: 1fr 1fr 1fr; */
+}
+.shoes {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: .25fr 1fr;
+}
+.shoe {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+
+}
+img {
+  width: 100%;
+}
+.temp {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.sidebar {
+  width: 120px;
+}
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+h3 {
+  margin: 0;
+}
+
+
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.1);
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 1rem 1.5rem;
+  width: 24rem;
+  border-radius: 0.5rem;
+}
+
+.close-button {
+  float: right;
+  width: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  background-color: lightgray;
+}
+
+.cart-review-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  
+  
+}
+.checkout-shoe-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.checkout-modal-image {
+  width: 100px;
+}
+
+.checkout-details-and-price-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr .5fr;
+  /* display: flex;
+  width: 150px;
+  flex-direction: column;
+  margin-left: auto; */
+  /* align-items: flex-end; */
+}
+.checkout-details-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-price {
+  display: block;
+  /* width: 40px; */
+  margin-left: auto;
+}
+
+.checkout-delete-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+.checkout-summary-label {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  width: 100%;
+}
+.cart-review {
+  font-size: 12px;
+  /* display: flex; */
+  /* flex-direction: column; */
+}
