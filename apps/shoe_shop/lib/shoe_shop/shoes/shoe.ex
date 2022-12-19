@@ -18,7 +18,7 @@ defmodule ShoeShop.Shoes.Shoe do
   @doc false
   def changeset(shoes, attrs) do
     shoes
-    |> cast(attrs, [:img_url, :type, :style, :price, :sizes, :name])
+    |> cast(attrs, [:id, :img_url, :type, :style, :price, :sizes, :name])
     |> validate_required([])
   end
 end

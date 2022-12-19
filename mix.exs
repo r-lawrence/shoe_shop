@@ -7,7 +7,15 @@ defmodule ShoeShop.Umbrella.MixProject do
       version: "0.1.0",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      aliases: aliases()
+      aliases: aliases(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test,
+        "coveralls.json": :test
+      ]
     ]
   end
 
@@ -39,6 +47,8 @@ defmodule ShoeShop.Umbrella.MixProject do
   defp aliases do
     [
       # run `mix setup` in all child apps
+      # "test:coveralls": ["cmd --app shoe_shop mix apps/shoe_shop/coveralls.json"],
+      "test:coverage": "cmd mix coveralls",
       setup: ["cmd mix setup"]
     ]
   end

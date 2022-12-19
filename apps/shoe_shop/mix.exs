@@ -13,7 +13,15 @@ defmodule ShoeShop.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test,
+        "coveralls.json": :test
+      ]
     ]
   end
 
@@ -40,7 +48,8 @@ defmodule ShoeShop.MixProject do
       {:ecto_sql, "~> 3.6"},
       {:postgrex, ">= 0.0.0"},
       {:jason, "~> 1.2"},
-      {:swoosh, "~> 1.3"}
+      {:swoosh, "~> 1.3"},
+      {:excoveralls, "~> 0.10", only: :test},
     ]
   end
 

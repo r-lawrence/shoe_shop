@@ -4,17 +4,29 @@ defmodule ShoeShop.ShoesFixtures do
   entities via the `ShoeShop.Shoes` context.
   """
 
+  alias ShoeShop.Repo
+  alias ShoeShop.Shoes.Shoe
   @doc """
   Generate a shoe.
   """
-  def shoe_fixture(attrs \\ %{}) do
+  def insert_shoe(attrs \\ %{}) do
     {:ok, shoe} =
-      attrs
-      |> Enum.into(%{
-
-      })
-      |> ShoeShop.Shoes.create_shoe()
-
+      %Shoe{}
+        |> Shoe.changeset(attrs)
+        |> Repo.insert()
     shoe
+  end
+
+  def insert_multiple_shoes(shoes \\ []) do
+    inserted_shoes = Enum.map(shoes, fn shoe ->
+      {:ok, new_shoe} =
+        %Shoe{}
+        |> Shoe.changeset(shoe)
+        |> Repo.insert()
+
+      new_shoe
+    end)
+
+    inserted_shoes
   end
 end
