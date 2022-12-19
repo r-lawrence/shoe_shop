@@ -22,7 +22,7 @@
 
     <div class="shoe-container">
       <%= for shoe <- assigns.shoes do %>
-        <div class="shoe" phx-click="renderShoePreview" phx-value-shoe_id={shoe.id}>
+        <div class={"shoe-"<>"#{shoe.id}"} phx-click="renderShoePreview" phx-value-shoe_id={shoe.id}>
 
           <img src={shoe.img_url}>
           <span><%= shoe.name %></span>
@@ -49,7 +49,7 @@
            <option ><%= size %></option>
          <% end %>
         </select>
-        <button id={assigns.preview.id} phx-hook="addToCart">add to cart</button>
+        <button id={"add-to-cart-shoe-id-"<>"#{assigns.preview.id}"} phx-hook="addToCart">add to cart</button>
       </div>
     </div>
   <%end %>

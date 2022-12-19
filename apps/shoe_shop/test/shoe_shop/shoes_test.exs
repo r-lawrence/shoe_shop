@@ -1,57 +1,109 @@
 defmodule ShoeShop.ShoesTest do
   use ShoeShop.DataCase
-
+  import ShoeShop.ShoesFixtures
   alias ShoeShop.Shoes
 
+  alias ShoeShop.Repo
+
   describe "shoes" do
-    alias ShoeShop.Shoes.Shoe
-
-    import ShoeShop.ShoesFixtures
-
-    @invalid_attrs %{}
-
     test "list_shoes/0 returns all shoes" do
-      shoe = shoe_fixture()
+      shoe = insert_shoe(%{
+        id: Ecto.UUID.generate(),
+        img_url: "/temp-1.png",
+        type: "Men",
+        style: "exercise",
+        price: 100,
+        sizes: [6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0],
+        name: "Basic"
+      })
+
       assert Shoes.list_shoes() == [shoe]
     end
 
-    test "get_shoe!/1 returns the shoe with given id" do
-      shoe = shoe_fixture()
-      assert Shoes.get_shoe!(shoe.id) == shoe
+    test "get_type/2 when type is set to men, returns only mens shoes" do
+      handle_multi_insert_setup()
+      all_shoes = Shoes.list_shoes()
+      mens_shoes = Shoes.get_type(:type, "Men")
+
+      assert length(all_shoes) > length(mens_shoes)
+      Enum.each(mens_shoes, fn shoe ->
+        assert shoe.type == "Men"
+      end)
     end
 
-    test "create_shoe/1 with valid data creates a shoe" do
-      valid_attrs = %{}
+    test "get_type/2 when type is set to women, returns only womens shoes" do
+      handle_multi_insert_setup()
+      all_shoes = Shoes.list_shoes()
+      mens_shoes = Shoes.get_type(:type, "Women")
 
-      assert {:ok, %Shoe{} = shoe} = Shoes.create_shoe(valid_attrs)
+      assert length(all_shoes) > length(mens_shoes)
+      Enum.each(mens_shoes, fn shoe ->
+        assert shoe.type == "Women"
+      end)
     end
+  end
 
-    test "create_shoe/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Shoes.create_shoe(@invalid_attrs)
-    end
+  defp handle_multi_insert_setup do
+    shoes = insert_multiple_shoes(
+      [
+        %{
+          id: Ecto.UUID.generate(),
+          img_url: "/temp-1.png",
+          type: "Men",
+          style: "exercise",
+          price: 100,
+          sizes: [6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0],
+          name: "Basic"
+        },
+        %{
+          id: Ecto.UUID.generate(),
+          img_url: "/temp-2.png",
+          type: "Men",
+          style: "exercise",
+          price: 100,
+          sizes: [6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0],
+          name: "Enhanced"
+        },
+        %{
+          id: Ecto.UUID.generate(),
+          img_url: "/temp-3.png",
+          type: "Men",
+          style: "exercise",
+          price: 100,
+          sizes: [6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0],
+          name: "Pro"
+        },
+        %{
+          id: Ecto.UUID.generate(),
+          img_url: "/temp-1.png",
+          type: "Women",
+          style: "exercise",
+          price: 100,
+          sizes: [6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0],
+          name: "Basic"
+        },
+        %{
+          id: Ecto.UUID.generate(),
+          img_url: "/temp-1.png",
+          type: "Women",
+          style: "exercise",
+          price: 100,
+          sizes: [6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0],
+          name: "Enhanced"
+        },
+        %{
+          id: Ecto.UUID.generate(),
+          img_url: "/temp-1.png",
+          type: "Women",
+          style: "exercise",
+          price: 100,
+          sizes: [6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0],
+          name: "Pro"
+        }
+      ]
+    )
+    shoes
 
-    test "update_shoe/2 with valid data updates the shoe" do
-      shoe = shoe_fixture()
-      update_attrs = %{}
 
-      assert {:ok, %Shoe{} = shoe} = Shoes.update_shoe(shoe, update_attrs)
-    end
-
-    test "update_shoe/2 with invalid data returns error changeset" do
-      shoe = shoe_fixture()
-      assert {:error, %Ecto.Changeset{}} = Shoes.update_shoe(shoe, @invalid_attrs)
-      assert shoe == Shoes.get_shoe!(shoe.id)
-    end
-
-    test "delete_shoe/1 deletes the shoe" do
-      shoe = shoe_fixture()
-      assert {:ok, %Shoe{}} = Shoes.delete_shoe(shoe)
-      assert_raise Ecto.NoResultsError, fn -> Shoes.get_shoe!(shoe.id) end
-    end
-
-    test "change_shoe/1 returns a shoe changeset" do
-      shoe = shoe_fixture()
-      assert %Ecto.Changeset{} = Shoes.change_shoe(shoe)
-    end
   end
 end

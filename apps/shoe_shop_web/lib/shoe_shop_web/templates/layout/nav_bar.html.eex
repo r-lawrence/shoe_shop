@@ -1,7 +1,7 @@
 <header >
   <h1>ShoeShop</h1>
   <%= if length(assigns.cart) > 0 do%>
-    <div>
+    <div class="shoe-cart">
       <span >items in cart: <%=to_string(length(assigns.cart))%></span>
       <button id="checkout-btn" phx-click="showCheckoutModal">checkout</button>
     </div>

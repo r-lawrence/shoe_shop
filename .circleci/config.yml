@@ -22,5 +22,18 @@ jobs:  # basic units of work in a run
       - run:
           name: build app, create and migrate db
           command: | # get updated dependencies & compile them
-            mix setup
+            mix deps.get
+            mix ecto.create
+            mix ecto.migrate
+            mix deps.compile
+      - run:
+          name: run test coverage
+          command: |
+            mix coveralls.json
+      - run: 
+          name: upload coverage
+          command: |
+            curl -Os https://uploader.codecov.io/latest/linux/codecov
+            chmod +x codecov
+            ./codecov -t ${CODECOV_TOKEN}
 
