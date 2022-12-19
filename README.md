@@ -2,7 +2,6 @@
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/r-lawrence/shoe_shop/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/r-lawrence/shoe_shop/tree/main)
 [![codecov](https://codecov.io/github/r-lawrence/shoe_shop/branch/main/graph/badge.svg?token=H33XW1I7PD)](https://codecov.io/github/r-lawrence/shoe_shop)
-
 > Repo still in progress, check branches for most updated code.
 
 A phoenix umbrella application built using live view, to demo imitate a fake e-commerce shoe shopping experience.  This application was generated using the `phx.new` phoenix project generator, then modified accordingly to achieve desired result.
