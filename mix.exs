@@ -32,7 +32,9 @@ defmodule ShoeShop.Umbrella.MixProject do
   # Dependencies listed here are available only for this project
   # and cannot be accessed from applications inside the apps/ folder.
   defp deps do
-    []
+    [
+      {:git_hooks, "~> 0.7.0", only: [:dev], runtime: false}
+    ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
@@ -49,6 +51,7 @@ defmodule ShoeShop.Umbrella.MixProject do
       # run `mix setup` in all child apps
       # "test:coveralls": ["cmd --app shoe_shop mix apps/shoe_shop/coveralls.json"],
       "test:coverage": "cmd mix coveralls",
+      "ecto:reset": ["cmd mix ecto.drop", "cmd mix setup"],
       setup: ["cmd mix setup"]
     ]
   end
