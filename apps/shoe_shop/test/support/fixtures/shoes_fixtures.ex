@@ -6,26 +6,29 @@ defmodule ShoeShop.ShoesFixtures do
 
   alias ShoeShop.Repo
   alias ShoeShop.Shoes.Shoe
+
   @doc """
   Generate a shoe.
   """
   def insert_shoe(attrs \\ %{}) do
     {:ok, shoe} =
       %Shoe{}
-        |> Shoe.changeset(attrs)
-        |> Repo.insert()
+      |> Shoe.changeset(attrs)
+      |> Repo.insert()
+
     shoe
   end
 
   def insert_multiple_shoes(shoes \\ []) do
-    inserted_shoes = Enum.map(shoes, fn shoe ->
-      {:ok, new_shoe} =
-        %Shoe{}
-        |> Shoe.changeset(shoe)
-        |> Repo.insert()
+    inserted_shoes =
+      Enum.map(shoes, fn shoe ->
+        {:ok, new_shoe} =
+          %Shoe{}
+          |> Shoe.changeset(shoe)
+          |> Repo.insert()
 
-      new_shoe
-    end)
+        new_shoe
+      end)
 
     inserted_shoes
   end
