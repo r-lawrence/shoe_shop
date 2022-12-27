@@ -1,0 +1,22 @@
+  <div class="shoes">
+    <div class="sidebar">
+      <h3>Filter</h3>
+      <label class="temp"> excercise
+        <input class="checkbox" type="checkbox">
+      </label>
+      <label  class="temp"> fashion
+        <input class="checkbox" type="checkbox">
+      </label>
+    </div>
+
+    <div class="shoe-container">
+      <%= for shoe <- assigns.shoes do %>
+        <div class={"shoe-"<>"#{shoe.id}"} phx-click="renderShoePreview" phx-value-shoe_id={shoe.id}>
+          <img src={shoe.img_url}>
+          <span><%= shoe.name %></span>
+          <span><%= shoe.style%></span>
+          <span>$ <%= shoe.price%>  </span>
+        </div>
+      <% end %>
+    </div>
+  </div>

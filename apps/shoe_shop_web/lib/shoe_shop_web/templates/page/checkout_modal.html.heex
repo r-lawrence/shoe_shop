@@ -1,0 +1,40 @@
+<div class="checkout-preview-modal">
+  <div class="modal-content">
+    <span phx-value-modal="checkout" phx-click="closeModal" class="close-button">x</span>
+    <div class="cart-review-container">
+      <div class="cart-review">
+        <h2> Bag</h2>
+
+        <%= for item <- assigns.cart do %>
+          <div class="checkout-shoe-container">
+            <div class="checkout-image-container">
+              <img class="checkout-modal-image" src={item.img_url}>
+            </div>
+
+            <div class="checkout-details-and-price-container">
+              <div class="checkout-details-container">
+                <span><%= item.name %></span>
+                <span><%= item.style %></span>
+                <span><%= item.type %></span>
+
+                <span>Shoe Size <%= item.size %></span>
+
+              </div>
+              <div class="checkout-price-container">
+                <span class="checkout-price">$<%= item.price %></span>
+
+              </div>
+              <div class="checkout-delete-item">
+
+                <span phx-click="removeCartItem" phx-value-id={item.id}>x</span>
+              </div>
+            </div>
+          </div>
+        <%end %>
+      </div>
+
+      <%= ShoeShopWeb.PageView.render_summary(assigns) %>
+
+    </div>
+  </div>
+</div>
