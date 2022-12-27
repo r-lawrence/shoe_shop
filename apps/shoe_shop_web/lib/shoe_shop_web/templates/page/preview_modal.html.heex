@@ -1,0 +1,16 @@
+
+<div class="preview-shoe-modal">
+  <div class="modal-content">
+    <span phx-value-modal="preview" phx-click="closeModal" class="close-button">x</span>
+    <img src={assigns.preview.img_url}>
+    <span><%= assigns.preview.name %></span>
+    <span><%= assigns.preview.style%></span>
+    <span>$ <%= assigns.preview.price%> </span>
+    <select class="size-selection">
+      <%= for size <- assigns.preview.sizes do %>
+        <option ><%= size %></option>
+      <% end %>
+    </select>
+    <button id={"add-to-cart-shoe-id-"<>"#{assigns.preview.id}"} phx-hook="addToCart">add to cart</button>
+  </div>
+</div>
